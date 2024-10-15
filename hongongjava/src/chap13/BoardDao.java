@@ -1,0 +1,15 @@
+package chap13;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class BoardDao {
+	public List<Board> getBoardList() {
+		List<Board> list = new ArrayList<Board>();
+		
+		list.add(new Board("제목1", "내용1", "글쓴이1"));
+		list.add(new Board("제목2", "내용2", "글쓴이2"));
+		list.add(new Board("제목3", "내용3", "글쓴이3"));
+		return list;
+	}
+}
