@@ -30,6 +30,17 @@ public class FrontController  extends HttpServlet{
 		//회원등록 1)등록화면 2)등록처리
 		map.put("/memberAddForm.do", new MemberAddFormControl());
 		map.put("/memberAdd.do", new MemberAddControl());
+		
+		//게시판 관련
+		map.put("/boardList.do", new BoardListControl());
+		map.put("/board.do", new BoardControl());
+		
+		map.put("/boardAddForm.do", new BoardAddFormControl());
+		map.put("/boardAdd.do", new BoardAddControl());
+		
+		map.put("/boardEdit.do", new BoardEditControl());
+		
+		map.put("/boardDel.do", new BoardDelControl());
 	}
 	
 	@Override
@@ -39,7 +50,7 @@ public class FrontController  extends HttpServlet{
 		String uri = req.getRequestURI(); // /FreeBoard/add.do
 		String context = req.getContextPath(); // /FreeBoard
 		String page = uri.substring(context.length()); // /add.do
-		System.out.println(page);
+		//System.out.println(page);
 		
 		Control control = map.get(page);
 		control.exec(req, resp);

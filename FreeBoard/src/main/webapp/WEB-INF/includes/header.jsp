@@ -12,6 +12,7 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -19,10 +20,10 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">Member List</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberAddForm.do">Add Members</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시글 목록</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardAddForm.do">게시글 등록</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원 목록</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberAddForm.do">회원 등록</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
