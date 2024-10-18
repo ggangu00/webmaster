@@ -7,8 +7,11 @@
 
 <%
 	BoardVO bno = (BoardVO)request.getAttribute("boardvo");
+	String pg = (String) request.getAttribute("page");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
 	String msg = (String)request.getAttribute("msg");
+	String sc = (String) request.getAttribute("sc");
+	String kw = (String) request.getAttribute("kw");
 %>
 
 <h3>"<%=bno.getTitle() %>" 상세</h3>
@@ -18,7 +21,7 @@
 <%} %>
 
 <input type="hidden" name="bno" value="<%=bno.getBoardNo() %>">
-<table class="table table-bordered">	
+<table class="table table-bordered ">	
 <colgroup><col width="20%"><col width="30%"><col width="20%"><col width="30%"></colgroup>
 
 	<tbody>
@@ -64,7 +67,7 @@
 
 <script>
 	document.querySelector('input[value="수정"]').addEventListener('click', function(e){
-		location.href = 'boardEdit.do?bno=<%=bno.getBoardNo() %>';
+		location.href = 'boardEdit.do?page=<%=pg %>&bno=<%=bno.getBoardNo() %>&searchCondition=<%=sc%>&keyword=<%=kw%>';
 	});
 	
 	document.querySelector('input[value="삭제"]').addEventListener('click', function(e){

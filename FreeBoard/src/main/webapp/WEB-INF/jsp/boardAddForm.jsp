@@ -3,6 +3,8 @@
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <%
 	String msg = (String)request.getAttribute("msg");
+	String pg = (String) request.getAttribute("page");
+	String logId = (String) session.getAttribute("logId");
 %>
 
 <h3>게시글 등록</h3>
@@ -12,6 +14,8 @@
 <%} %>
 
 <form action="boardAdd.do" method="post">
+<input type="hidden" name="page" value="<%=pg %>">
+<input type="hidden" name="writer" value="<%=logId%>">
 	<table class="table table-bordered">
 		<tr>
 			<th>제목</th>
@@ -23,7 +27,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><input type="text" name="writer" class="form-control"></td>
+			<td><%=logId%></td>
 		</tr>
 	</table>
 	<div align="center">

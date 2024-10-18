@@ -15,14 +15,28 @@
     order by board_no
   </select>
   
-  <select id="listWithPage" parameterType="int">
+  <select id="listWithPage" parameterType="board">
 	select b.* from 
 	    (select rownum rn, a.* from 
-	        (select * from tbl_board order by board_no) a
+	        (select * from tbl_board
+	       		 <where>
+	        		<choose>
+	        			<when test="searchCondition == 'T'.toString()">
+	        				title like '%'||#{keyword}||'%' 
+	        			</when>
+	        			<when test="searchCondition == 'W'.toString()">
+	        				writer like '%'||#{keyword}||'%' 
+	        			</when>
+	        			<when test="searchCondition == 'TW'.toString()">
+	        				 (title like '%'||#{keyword}||'%') or (writer like '%'||#{keyword}||'%')  
+	        			</when>
+	        		</choose>
+	        	</where>	
+	        		order by board_no desc) a
 	    )b
-	where b.rn > (#{page} - 1 ) * 5
+	where b.rn > (#{page} - 1 ) * 10
 	<![CDATA[
-	and b.rn <= (#{page} * 5)
+	and b.rn <= (#{page} * 10)
 	]]>
   </select>
   
@@ -66,5 +80,24 @@
   	set view_cnt = view_cnt+1  	
   	where board_no=#{boardNo}  		
   </update>
+  
+  <select id="selectCount" resultType="int">
+  	select count(1)
+  	from tbl_board
+  	
+  	<where>
+   		<choose>
+   			<when test="searchCondition == 'T'.toString()">
+   				title like '%'||#{keyword}||'%' 
+   			</when>
+   			<when test="searchCondition == 'W'.toString()">
+   				writer like '%'||#{keyword}||'%' 
+   			</when>
+   			<when test="searchCondition == 'TW'.toString()">
+   				 (title like '%'||#{keyword}||'%') or (writer like '%'||#{keyword}||'%')  
+   			</when>
+   		</choose>
+   	</where>	
+  </select>
   
 </mapper>

@@ -18,6 +18,9 @@ public class BoardEditControl implements Control{
 		req.setCharacterEncoding("utf-8");
 		
 		String bno = req.getParameter("bno");
+		String page = req.getParameter("page");
+		String sc = req.getParameter("searchCondition");
+		String kw = req.getParameter("keyword");
 		BoardService svc = new BoardServiceImpl();
 		
 		//GET: 수정화면, POST: 수정처리
@@ -26,12 +29,16 @@ public class BoardEditControl implements Control{
 			BoardVO board = svc.searchBoard(Integer.parseInt(bno));
 			
 			req.setAttribute("boardvo", board);
+			req.setAttribute("page", page);
+			req.setAttribute("kw", kw);
+			req.setAttribute("sc", sc);
 			req.getRequestDispatcher("WEB-INF/jsp/boardEditForm.jsp").forward(req, resp);
 			
 		}else if(req.getMethod().equals("POST")) {
 			
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+			
 			
 			BoardVO board = new BoardVO();
 			board.setBoardNo(Integer.parseInt(bno));
@@ -40,11 +47,12 @@ public class BoardEditControl implements Control{
 			
 			if(svc.modifyBoard(board)) {
 				//정상처리 - 목록으로
-				resp.sendRedirect("boardList.do");
+				resp.sendRedirect("boardList.do?page="+page+"&searchCondition="+sc+"&keyword="+kw);
 			}else {
 				board = svc.searchBoard(Integer.parseInt(bno));
 				
 				req.setAttribute("boardvo", board);
+				req.setAttribute("page", page);
 				req.setAttribute("msg", "수정할 게시글이 없습니다.");
 				req.getRequestDispatcher("WEB-ING/jsp/boardEditForm.jsp").forward(req, resp);
 			}

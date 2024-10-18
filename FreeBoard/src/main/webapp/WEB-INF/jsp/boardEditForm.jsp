@@ -6,8 +6,13 @@
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <%
 	String msg = (String)request.getAttribute("msg");
+	String pg = (String) request.getAttribute("page");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
 	BoardVO bno = (BoardVO) request.getAttribute("boardvo");
+	String sc = (String) request.getAttribute("sc");
+	String kw = (String) request.getAttribute("kw");
+	
+	String logId = (String) session.getAttribute("logId");
 %>
 
 <%if(msg != null){ %>
@@ -19,9 +24,11 @@
 
 <form action="boardEdit.do" method="post">
 	<input type="hidden" name="bno" value="<%=bno.getBoardNo() %>">
+	<input type="hidden" name="page" value="<%=pg %>">
+	<input type="hidden" name="searchCondition" value="<%=sc %>">
+	<input type="hidden" name="keyword" value="<%=kw %>">
 	<table class="table table-bordered">	
 	<colgroup><col width="20%"><col width="30%"><col width="20%"><col width="30%"></colgroup>
-	
 		<tbody>
 			<tr>
 				<th>글번호</th>
@@ -51,7 +58,7 @@
 		</tbody>
 	</table>
 	<div align="center">
-		<input type="submit" value="저장" class="btn btn-primary">
+		<input type="submit" value="저장" class="btn btn-primary" <%=(logId != null && logId.equals(bno.getWriter()) ? "" : "disabled" )%>>
 		<input type="button" value="목록" onClick="location.href='boardList.do'" class="btn btn-outline-primary">
 	</div>
 </form>

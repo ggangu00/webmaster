@@ -17,11 +17,17 @@ public class BoardControl implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//글목록 보여주기. 조회 후 jsp 전달.
 		String bno = req.getParameter("bno");
+		String page = req.getParameter("page");
+		String sc = req.getParameter("searchCondition");
+		String kw = req.getParameter("keyword");
 		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.searchBoard(Integer.parseInt(bno));
 		
 		req.setAttribute("boardvo", board);
+		req.setAttribute("page", page);
+		req.setAttribute("kw", kw);
+		req.setAttribute("sc", sc);
 		
 		req.getRequestDispatcher("WEB-INF/jsp/board.jsp").forward(req, resp);
 

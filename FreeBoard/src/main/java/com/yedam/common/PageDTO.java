@@ -7,13 +7,17 @@ public class PageDTO {
 	private int startPage, endPage;
 	private boolean prev, next;
 	private int page; //현재페이지
+	private int totalCnt;
 	
-	public PageDTO(int page) {
-		int totalCnt = 35;
+	public PageDTO(int page, int totalCnt) {
+		
+		//int totalCnt = 80;
+		this.page = page;
+		this.totalCnt = totalCnt;
 		this.endPage = (int)Math.ceil(page / 10.0) * 10;
 		this.startPage = this.endPage - 9;
 		
-		int realEnd = (int) Math.ceil(totalCnt / 5.0);
+		int realEnd = (int) Math.ceil(totalCnt / 10.0);
 		this.endPage = this.endPage > realEnd ? realEnd : this.endPage;
 		
 		this.prev = this.startPage > 1;
